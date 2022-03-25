@@ -111,15 +111,29 @@ def create_playlist():
     return (response.json())
 
 
-# @bp.route('/<playlist_id>/write', methods=['POST'])
-# def add_song(playlist_id):
-#     headers = request.headers
-#     # check header here
-#     if 'Authorization' not in headers:
-#         return Response(json.dumps({"error": "missing auth"}),
-#                         status=401,
-#                         mimetype='application/json')
-#     try:
+@bp.route('/<playlist_id>', methods=['PUT'])
+def update_playlistName(playlist_id):
+    headers = request.headers
+    # check header here
+    if 'Authorization' not in headers:
+        return Response(json.dumps({"error": "missing auth"}),
+                        status=401,
+                        mimetype='application/json')
+    try:
+        content = request.get_json()
+        playlist_name = content['Name']
+        playlist_id = content['playlist_id']
+    except Exception:
+        return json.dumps({"message": "error reading arguments"})
+    payload = {"objtype": "playlist", "objkey": playlist_id}
+    url_put = db['name'] + '/' + db['endpoint'][3]
+    response = requests.put(
+        url_put,
+        params=payload,
+        json={"objtype": "playlist",
+              "Name": playlist_name},
+        headers={'Authorization': headers['Authorization']})
+    return (response.json())
 
 
 @bp.route('/<playlist_id>', methods=['GET'])
