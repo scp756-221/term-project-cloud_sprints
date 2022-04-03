@@ -91,11 +91,12 @@ class PlayList():
         number
             The HTTP status code returned by the music service.
         '''
-        requests.post(
+        r = requests.post(
             f"{self._url}{playlist_id}/delete",
             json={'music_id': m_id},
             headers={'Authorization': self._auth}
         )
+        return r.status_code
 
     def read(self, playlist_id):
         """Read a playlist.
