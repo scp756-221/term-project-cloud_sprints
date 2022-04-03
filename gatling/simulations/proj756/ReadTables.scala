@@ -62,7 +62,7 @@ object RPlaylist {
 
   val feeder = csv("playlist.csv").eager.random
 
-  val ruser = forever("i") {
+  val rplaylist = forever("i") {
     feed(feeder)
     .exec(http("RPlaylist ${i}")
       .get("/api/v1/playlist/${UUID}"))
@@ -212,7 +212,7 @@ class ReadBothVaryingSim extends ReadTablesSim {
   
   /* playlist update */
   val scnReadPV = scenario("ReadPlaylistVarying")
-    .exec(RPlaylistVarying.ruser)
+    .exec(RPlaylistVarying.rplaylist)
   /********************************/
 
 
