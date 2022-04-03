@@ -60,7 +60,7 @@ services:
       - cmpt756s1
       - cmpt756s2
       - cmpt756s3
-    build: ./v1.1
+    build: ./v1
     image: ci_test
     container_name: test
     environment:
