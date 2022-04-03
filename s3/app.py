@@ -111,15 +111,122 @@ def create_playlist():
     return (response.json())
 
 
-# @bp.route('/<playlist_id>/write', methods=['POST'])
-# def add_song(playlist_id):
-#     headers = request.headers
-#     # check header here
-#     if 'Authorization' not in headers:
-#         return Response(json.dumps({"error": "missing auth"}),
-#                         status=401,
-#                         mimetype='application/json')
-#     try:
+@bp.route('/<playlist_id>/add', methods=['POST'])
+def write_song_pl(playlist_id):
+    headers = request.headers
+    # check header here
+    if 'Authorization' not in headers:
+        return Response(json.dumps({"error": "missing auth"}),
+                        status=401,
+                        mimetype='application/json')
+    try:
+        content = request.get_json()
+        song_to_write_id = content['music_id']
+    except Exception:
+        return json.dumps({"message": "error reading arguments"})
+
+    payload_pl = {"objtype": "playlist", "objkey": playlist_id}
+    url_read = db['name'] + '/' + db['endpoint'][0]
+    response = requests.get(
+        url_read,
+        params=payload_pl,
+        headers={'Authorization': headers['Authorization']})
+
+    try:
+        songlist_to_write = response.json()['Items'][0]['Playlist']
+    except Exception:
+        return json.dumps({"message": "Failed to get the playlist_id"})
+
+    payload_ms = {"objtype": "music", "objkey": song_to_write_id}
+    get_song = requests.get(
+        url_read,
+        params=payload_ms,
+        headers={'Authorization': headers['Authorization']}
+    )
+
+    if get_song.json()['Count'] == 0:
+        return Response(json.dumps({"error":
+                        f"failed to get the music_id {song_to_write_id}"}),
+                        status=600,
+                        mimetype='application/json')
+
+    if song_to_write_id in songlist_to_write:
+        return Response(json.dumps({"error":
+                        f"the music_id {song_to_write_id} already exists"}),
+                        status=600,
+                        mimetype='application/json')
+
+    try:
+        songlist_to_write.append(song_to_write_id)
+    except Exception:
+        return json.dumps({"message": "Failed to write the music_id"})
+
+    url = db['name'] + '/' + db['endpoint'][3]
+    response = requests.put(
+        url,
+        params=payload_pl,
+        json={"Playlist": songlist_to_write},
+        headers={'Authorization': headers['Authorization']})
+    return (response.json())
+
+
+@bp.route('/<playlist_id>/delete', methods=['POST'])
+def delete_song_pl(playlist_id):
+    headers = request.headers
+    # check header here
+    if 'Authorization' not in headers:
+        return Response(json.dumps({"error": "missing auth"}),
+                        status=401,
+                        mimetype='application/json')
+    try:
+        content = request.get_json()
+        song_to_delete_id = content['music_id']
+    except Exception:
+        return json.dumps({"message": "error reading arguments"})
+
+    payload_pl = {"objtype": "playlist", "objkey": playlist_id}
+    url_read = db['name'] + '/' + db['endpoint'][0]
+    response = requests.get(
+        url_read,
+        params=payload_pl,
+        headers={'Authorization': headers['Authorization']})
+
+    try:
+        songlist_to_delete = response.json()['Items'][0]['Playlist']
+    except Exception:
+        return json.dumps({"message": "Failed to get the playlist_id"})
+
+    payload_ms = {"objtype": "music", "objkey": song_to_delete_id}
+    get_song = requests.get(
+        url_read,
+        params=payload_ms,
+        headers={'Authorization': headers['Authorization']}
+    )
+
+    if get_song.json()['Count'] == 0:
+        return Response(json.dumps({"error":
+                        f"failed to get the music_id {song_to_delete_id}"}),
+                        status=600,
+                        mimetype='application/json')
+
+    if song_to_delete_id not in songlist_to_delete:
+        return Response(json.dumps({"error":
+                        f"the music_id {song_to_delete_id} does not exist"}),
+                        status=600,
+                        mimetype='application/json')
+
+    try:
+        songlist_to_delete.remove(song_to_delete_id)
+    except Exception:
+        return json.dumps({"message": "Failed to remove the music_id"})
+
+    url = db['name'] + '/' + db['endpoint'][3]
+    response = requests.put(
+        url,
+        params=payload_pl,
+        json={"Playlist": songlist_to_delete},
+        headers={'Authorization': headers['Authorization']})
+    return (response.json())
 
 
 @bp.route('/<playlist_id>', methods=['GET'])
