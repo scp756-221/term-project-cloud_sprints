@@ -27,14 +27,12 @@ def plserv(request, playlist_url, auth):
 
 
 @pytest.fixture
-def song(request):
-    # Recorded 1956
+def song1(request):
     return ('Taylor Swift', 'The Last Great American Dynasty')
 
 
 @pytest.fixture
 def song2(request):
-    # Recorded 1956
     return ('Backxwash', 'Bad Juju')
 
 
@@ -43,12 +41,30 @@ def playlist1(request):
     return ('TESTlist')
 
 
-def test_simple_run(plserv, mserv, song, song2, playlist1):
-    trc, m_id1 = mserv.create(song[0], song[1])
+def test_create_delete_playlist(plserv, mserv, song1, song2, playlist1):
+    trc, m_id1 = mserv.create(song1[0], song1[1])
     trc, m_id2 = mserv.create(song2[0], song2[1])
     trc, p_id = plserv.create(playlist1, [m_id1, m_id2])
     assert trc == 200
     trc, plname, plist = plserv.read(p_id)
     assert trc == 200 and plname == playlist1 and plist == [m_id1, m_id2]
     plserv.delete(p_id)
-    # No status to check
+    mserv.delete(m_id1)
+    mserv.delete(m_id2)
+
+
+def test_update_playlist(plserv, mserv, song1, song2, playlist1):
+    trc, m_id1 = mserv.create(song1[0], song1[1])
+    trc, m_id2 = mserv.create(song2[0], song2[1])
+    trc, p_id = plserv.create(playlist1, [m_id1])
+    trc = plserv.write_song(p_id, m_id2)
+    assert trc == 200
+    trc, plname, plist = plserv.read(p_id)
+    assert trc == 200 and plname == playlist1 and plist == [m_id1, m_id2]
+    trc = plserv.delete_song(p_id, m_id2)
+    assert trc == 200
+    trc, plname, plist = plserv.read(p_id)
+    assert trc == 200 and plname == playlist1 and plist == [m_id1]
+    plserv.delete(p_id)
+    mserv.delete(m_id1)
+    mserv.delete(m_id2)
