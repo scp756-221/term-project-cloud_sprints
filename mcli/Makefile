@@ -1,15 +1,24 @@
 # Makefile for standalone Music service (S2)
 
-VER=v0.8
+VER=v1.0
 
-# this is needed to switch M1 Mac to x86 for compatibility with x86 instances/students
-ARCH=--platform x86_64
+$(eval S2_SERVER=$(shell docker inspect s2 --format '{{.NetworkSettings.IPAddress}}'))
+ifeq ("$(S2_SERVER)","")
+	S2_SERVER="0.0.0.0"
+endif
 
-SERVER=`docker inspect s2 --format '{{.NetworkSettings.IPAddress}}'`
-PORT=30001
+$(eval S3_SERVER=$(shell docker inspect s3 --format '{{.NetworkSettings.IPAddress}}'))
+ifeq ("$(S3_SERVER)","")
+	S3_SERVER="0.0.0.0"
+endif
+
+S2_PORT=30001
+
+S3_PORT=30003
 
 build-mcli:
-	docker image build $(ARCH) -f Dockerfile -t mcli:$(VER) .
+	docker image build -f Dockerfile -t mcli:$(VER) .
 
 run-mcli:
-	docker container run $(ARCH) -it --rm --name mcli mcli:$(VER) python3 mcli.py $(SERVER) $(PORT)
+	docker container run -it --rm --name mcli mcli:$(VER) python3 mcli.py $(S2_SERVER) $(S3_SERVER) $(S2_PORT) $(S3_PORT)
+
