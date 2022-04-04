@@ -284,32 +284,7 @@ Enter 'help' for command list.
             )
         if r.status_code != 200:
             print("Non-successful status code:", r.status_code)
-
-
-    # def do_updatePlaylist(self, arg):
-    #     '''
-    #     Update a playlist's name.
-
-    #     Parameters
-    #     ----------
-    #     playlist_id: int
-    #         The playlist_id of the playlist to update its playlistname.
-    #     '''
-    #     url = get_playlist_url(self.playlist_name, self.playlist_port)
-    #     args = parse_quoted_strings(arg)
-    #     payload = {
-    #         'playlist_id': args[0],
-    #         'Name': args[1]
-    #     }
-    #     r = requests.put(
-    #         url,
-    #         json=payload,
-    #         headers={'Authorization': DEFAULT_AUTH}
-    #     )
-    #     print(r.json())
-    #     if r.status_code != 200:
-    #         print("Non-successful status code:", r.status_code)
-
+            
 
 if __name__ == '__main__':
     args = parse_args()
