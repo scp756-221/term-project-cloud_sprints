@@ -5,6 +5,7 @@ This is the course repo for CMPT 756 (Spring 2022)
 You will find resources for your assignments and term project here.
 
 
+
 ### 1. Instantiate the template files
 
 #### Fill in the required values in the template variable file

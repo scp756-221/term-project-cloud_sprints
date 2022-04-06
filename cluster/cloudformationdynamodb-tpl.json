@@ -44,6 +44,50 @@
             "WriteCapacityUnits": "5"
           }
         }
+      },
+      "tablePlaylist": {
+        "Type": "AWS::DynamoDB::Table",
+        "Properties": {
+          "TableName": "Playlist-ZZ-REG-ID",
+          "AttributeDefinitions": [
+            {
+              "AttributeName": "playlist_id",
+              "AttributeType": "S"
+            }
+          ],
+          "KeySchema": [
+            {
+              "AttributeName": "playlist_id",
+              "KeyType": "HASH"
+            }
+          ],
+          "ProvisionedThroughput": {
+            "ReadCapacityUnits": "5",
+            "WriteCapacityUnits": "5"
+          }
+        }
+      },
+      "tablePlaylistSongs": {
+        "Type": "AWS::DynamoDB::Table",
+        "Properties": {
+          "TableName": "PlaylistSongs-ZZ-REG-ID",
+          "AttributeDefinitions": [
+            {
+              "AttributeName": "playlistsongs_id",
+              "AttributeType": "S"
+            }
+          ],
+          "KeySchema": [
+            {
+              "AttributeName": "playlistsongs_id",
+              "KeyType": "HASH"
+            }
+          ],
+          "ProvisionedThroughput": {
+            "ReadCapacityUnits": "5",
+            "WriteCapacityUnits": "5"
+          }
+        }
       }
     },
     "Description": "DynamoDB tables for ZZ-AWS-ACCESS-KEY-ID"
