@@ -18,8 +18,8 @@
             }
           ],
           "ProvisionedThroughput": {
-            "ReadCapacityUnits": "5",
-            "WriteCapacityUnits": "5"
+            "ReadCapacityUnits": "20000",
+            "WriteCapacityUnits": "20000"
           }
         }
       },
@@ -40,8 +40,8 @@
             }
           ],
           "ProvisionedThroughput": {
-            "ReadCapacityUnits": "5",
-            "WriteCapacityUnits": "5"
+            "ReadCapacityUnits": "20000",
+            "WriteCapacityUnits": "20000"
           }
         }
       },
@@ -62,30 +62,8 @@
             }
           ],
           "ProvisionedThroughput": {
-            "ReadCapacityUnits": "5",
-            "WriteCapacityUnits": "5"
-          }
-        }
-      },
-      "tablePlaylistSongs": {
-        "Type": "AWS::DynamoDB::Table",
-        "Properties": {
-          "TableName": "PlaylistSongs-ZZ-REG-ID",
-          "AttributeDefinitions": [
-            {
-              "AttributeName": "playlistsongs_id",
-              "AttributeType": "S"
-            }
-          ],
-          "KeySchema": [
-            {
-              "AttributeName": "playlistsongs_id",
-              "KeyType": "HASH"
-            }
-          ],
-          "ProvisionedThroughput": {
-            "ReadCapacityUnits": "5",
-            "WriteCapacityUnits": "5"
+            "ReadCapacityUnits": "20000",
+            "WriteCapacityUnits": "20000"
           }
         }
       }
