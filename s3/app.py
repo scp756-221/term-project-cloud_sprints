@@ -67,8 +67,11 @@ def list_all():
         return Response(json.dumps({"error": "missing auth"}),
                         status=401,
                         mimetype='application/json')
-    # list all songs here
-    return {}
+    url_read = db['name'] + '/' + db['endpoint'][0]
+    response = requests.get(
+        url_read,
+        headers={'Authorization': headers['Authorization']})
+    return (response.json())
 
 
 @bp.route('/', methods=['POST'])

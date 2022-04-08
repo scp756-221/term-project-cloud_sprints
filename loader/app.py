@@ -76,8 +76,8 @@ def create_playlist(name, playlist, uuid):
         url,
         auth=build_auth(),
         json={"objtype": "playlist",
-              "name": name,
-              "playlist": playlist,
+              "Name": name,
+              "Playlist": playlist,
               "uuid": uuid})
     return (response.json())
 
