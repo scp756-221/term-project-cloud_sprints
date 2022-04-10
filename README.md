@@ -168,7 +168,7 @@ make -f eks.mak stop
 
 `logs`: generated logs
 
-`mcli`: CLI for the 3 microservices
+`mcli`: CLI for the music microservice
 
 `s1`: user service
 
@@ -176,7 +176,7 @@ make -f eks.mak stop
 
 `s3`: playlist service
 
-`tools`: scripts for start the microsevices
+`tools`: scripts such as to start docker and the sevices
 
 ```bash
 .
