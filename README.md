@@ -40,7 +40,6 @@ tools/shell.sh
 /home/k8s# cd ci
 /home/k8s# ./runci-local.sh v1
 ~~~
-
 ### 3. Ensure AWS DynamoDB is accessible/running
 
 Regardless of where your cluster will run, it uses AWS DynamoDB
@@ -55,10 +54,15 @@ The resulting output should include tables `User`, `Music` and `Playlist`.
 
 ### 4. Prerequisites
 [Visual Studio Code (VSC)](https://code.visualstudio.com/)
+
 [Git and GitHub Desktop](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
+
 [Docker Desktop/Docker](https://docs.docker.com/get-docker/)
+
 [aws-cli](https://github.com/aws/aws-cli)
+
 [kubectl](https://kubernetes.io/docs/tasks/tools/)
+
 [istioctl](https://github.com/istio/istio/tree/master/istioctl)
 
 
@@ -113,6 +117,7 @@ Sign on to Grafana with the following parameters:
 User: admin
 Password: prom-operator
 After signon, you will see the Grafana home screen. Navigate to our dashboard by hovering on the “Dashboards” icon on the left. Select “Browse” from the menu. This will bring up a list of dashboards. Click on c756 transactions (it should be at or near the top of the list).
+
 2. simulation
 add up load progressively
 ~~~
@@ -152,15 +157,25 @@ make -f eks.mak stop
 ### 7. Structure of this repo
 
 `ci`: continuous integration
+
 `cluster`: to configure the cluster, should be treated with extra care such as not remove any lines from `.gitignore` file. 
+
 `db`: the database service
+
 `gatling`: for gatling simulation and tables
+
 `loader`: for loading files into DynamoDB
+
 `logs`: generated logs
+
 `mcli`: CLI for the 3 microservices
+
 `s1`: user service
+
 `s2`: music service
+
 `s3`: playlist service
+
 `tools`: scripts for start the microsevices
 
 ```bash
