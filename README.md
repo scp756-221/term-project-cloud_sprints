@@ -180,15 +180,18 @@ make -f eks.mak stop
 
 ```bash
 .
-├── dist (or build)
-├── node_modules
-├── bower_components (if using bower)
-├── test
-├── Gruntfile.js/gulpfile.js
+├── ci
+├── cluster
+├── db
+├── gatling
+├── loader
 ├── README.md
-├── package.json
-├── bower.json (if using bower)
-├── README.md
+├── logs
+├── mcli
+├── s1
+├── s2
+├── s3
+├── tools
 ├── *.mak
 ├── *.gatling-N-SERVICE.sh
 ├── *.yaml
