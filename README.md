@@ -1,6 +1,6 @@
 # SFU CMPT 756 Term Project 
 
-This is the term project repo for the team cloud_sprint from course CMPT 756 (Spring 2022)
+This is the term project repo for the team cloud_sprint from course CMPT 756 (Spring 2022). This project is to apply and observe multiple principles of cloud computing, implemented with AWS platform, containerized application, the micro-service distributed system architecture pattern and Scrum methodology.
 
 ### 1. Instantiate the template files
 
