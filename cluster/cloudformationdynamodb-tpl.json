@@ -18,8 +18,8 @@
             }
           ],
           "ProvisionedThroughput": {
-            "ReadCapacityUnits": "20000",
-            "WriteCapacityUnits": "20000"
+            "ReadCapacityUnits": "200",
+            "WriteCapacityUnits": "200"
           }
         }
       },
@@ -40,8 +40,8 @@
             }
           ],
           "ProvisionedThroughput": {
-            "ReadCapacityUnits": "20000",
-            "WriteCapacityUnits": "20000"
+            "ReadCapacityUnits": "200",
+            "WriteCapacityUnits": "200"
           }
         }
       },
@@ -62,8 +62,8 @@
             }
           ],
           "ProvisionedThroughput": {
-            "ReadCapacityUnits": "20000",
-            "WriteCapacityUnits": "20000"
+            "ReadCapacityUnits": "200",
+            "WriteCapacityUnits": "200"
           }
         }
       }
