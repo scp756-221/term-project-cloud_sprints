@@ -138,3 +138,5 @@ allclouds.mak
 api.mak
 .DS_Store
 __pycache__
+.metals
+.vscode
