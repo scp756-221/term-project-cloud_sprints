@@ -192,8 +192,5 @@ make -f eks.mak stop
 ├── s2
 ├── s3
 ├── tools
-├── *.mak
-├── *.gatling-N-SERVICE.sh
-├── *.yaml
 └── .gitignore
 ```
